@@ -34,5 +34,66 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // variables
+      // var a = moment([2007, 0, 25]);
+      // var b = moment([2007, 0, 28]);
+      // var test = a.diff(b, "days"); // 1
+      // console.log(test);
+      var hoursInWorkDay = [
+        "9AM",
+        "10AM",
+        "11AM",
+        "12PM",
+        "1PM",
+        "2PM",
+        "3PM",
+        "4PM",
+        "5PM",
+      ];
+      var test;
+      var start = moment().startOf("day").add(9, "hours").format("hA");
+      var start2 = moment(start).add(1, "hours");
+      // var check = moment();
+      console.log(hoursInWorkDay);
+      console.log(start);
+      // console.log(check);
+      var past;
+      var present;
+      var future;
+      var timeContainer = $(".container");
+
+      // tools to use
+      // moment().add(Number, String);
+      // moment().subtract(Number, String);
+
+      // Current Day setup
+      var currentDay = moment().format("dddd, MMMM Do");
+      console.log(currentDay);
+      $("#currentDay").text(currentDay);
+      // for (var i = 0; i < hoursInWorkDay.length; i++) {
+      //   var hour = hoursInWorkDay[i];
+      //   var hoursToday = document.createElement("p");
+      //   hoursToday.textContent = hour;
+      //   var textPlace = document.createElement("texterea");
+      //   var saveBtn = document.createElement("button");
+      //   timeContainer.append(hoursToday);
+      //   hoursToday.append(textPlace);
+      //   hoursToday.append(saveBtn);
+      // }
+
+      // Children to be put together
+      // time of day
+
+      // textbox
+      // set data-index values
+
+      // lock button
+      // retrieve data-index
+      // set in textbox automatically
+
+      // lock button saves info in textbox
+    </script>
   </body>
 </html>
