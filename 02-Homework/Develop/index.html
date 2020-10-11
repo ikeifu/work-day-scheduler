@@ -28,7 +28,7 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div class="container">
+    <div class="container description">
       <!-- Timeblocks go here -->
     </div>
 
@@ -47,29 +47,10 @@
         "4PM",
         "5PM",
       ];
-      var test;
-      // var start = moment().startOf("day").add(9, "hours").format("hA");
-      // var check = moment();
+
       console.log(hoursInWorkDay);
-      // console.log(start);
-      // console.log(check);
       var timeContainer = $(".container");
-      // var currentHour = moment();
-      var currentHour = moment("3PM", "hA");
-      // tools to use
-      // moment().add(Number, String);
-      // moment().subtract(Number, String);
-      // var a = moment([2007, 0, 25]);
-      // var b = moment([2007, 0, 28]);
-      // var test = a.diff(b, "days");
-      // var beginningTime = moment("9AM", "hA");
-      // console.log(beginningTime + "fdasfsa");
-      // var twoPM = moment("2PM", "hA");
-      // console.log(twoPM + "two");
-      // var sevenPM = moment("7PM", "hA");
-      // console.log(sevenPM + "seven");
-      // console.log(sevenPM.isBefore(twoPM));
-      // Current Day setup
+      var currentHour = moment();
       var currentDay = moment().format("dddd, MMMM Do");
       console.log(currentDay);
 
@@ -79,23 +60,33 @@
         var hour = hoursInWorkDay[i];
         var hoursToday = document.createElement("p");
         hoursToday.textContent = hour;
+        hoursToday.classList.add("hour");
+        // hoursToday.classList.add("time-block");
+        hoursToday.classList.add("row");
         var textPlace = document.createElement("textarea");
         var pastPlans = localStorage.getItem(i);
         console.log(pastPlans);
         textPlace.textContent = pastPlans;
+
         if (currentHour.format("hA") === hour) {
           textPlace.classList.add("present");
-          textPlace.setAttribute("dataIndex", i);
+          textPlace.classList.add("row");
+          textPlace.classList.add("description");
+          // textPlace.classList.add("hour");
         } else if (currentHour.isBefore(moment(hour, "hA"))) {
           textPlace.classList.add("future");
-          textPlace.setAttribute("dataIndex", i);
+          textPlace.classList.add("row");
+          textPlace.classList.add("description");
         } else {
           textPlace.classList.add("past");
-          textPlace.setAttribute("dataIndex", i);
+          textPlace.classList.add("row");
+          textPlace.classList.add("description");
         }
         var saveBtn = document.createElement("button");
         saveBtn.classList.add("saveBtn");
+        saveBtn.classList.add("row");
         saveBtn.setAttribute("dataIndex", i);
+        saveBtn.classList.add("time-block");
         timeContainer.append(hoursToday);
         hoursToday.append(textPlace);
         hoursToday.append(saveBtn);
