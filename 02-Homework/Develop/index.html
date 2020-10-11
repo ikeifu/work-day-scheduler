@@ -48,38 +48,57 @@
         "5PM",
       ];
       var test;
-      var start = moment().startOf("day").add(9, "hours").format("hA");
+      // var start = moment().startOf("day").add(9, "hours").format("hA");
       // var check = moment();
       console.log(hoursInWorkDay);
-      console.log(start);
+      // console.log(start);
       // console.log(check);
-      var past;
-      var present;
-      var future;
       var timeContainer = $(".container");
-
+      // var currentHour = moment();
+      var currentHour = moment("3PM", "hA");
       // tools to use
       // moment().add(Number, String);
       // moment().subtract(Number, String);
       // var a = moment([2007, 0, 25]);
       // var b = moment([2007, 0, 28]);
       // var test = a.diff(b, "days");
-
+      // var beginningTime = moment("9AM", "hA");
+      // console.log(beginningTime + "fdasfsa");
+      // var twoPM = moment("2PM", "hA");
+      // console.log(twoPM + "two");
+      // var sevenPM = moment("7PM", "hA");
+      // console.log(sevenPM + "seven");
+      // console.log(sevenPM.isBefore(twoPM));
       // Current Day setup
       var currentDay = moment().format("dddd, MMMM Do");
       console.log(currentDay);
+
       $("#currentDay").text(currentDay);
+
       for (var i = 0; i < hoursInWorkDay.length; i++) {
         var hour = hoursInWorkDay[i];
         var hoursToday = document.createElement("p");
         hoursToday.textContent = hour;
-        var textPlace = document.createElement("texterea");
+        var textPlace = document.createElement("textarea");
+        var pastPlans = localStorage.getItem(i);
+        console.log(pastPlans);
+        textPlace.textContent = pastPlans;
+        if (currentHour.format("hA") === hour) {
+          textPlace.classList.add("present");
+          textPlace.setAttribute("dataIndex", i);
+        } else if (currentHour.isBefore(moment(hour, "hA"))) {
+          textPlace.classList.add("future");
+          textPlace.setAttribute("dataIndex", i);
+        } else {
+          textPlace.classList.add("past");
+          textPlace.setAttribute("dataIndex", i);
+        }
         var saveBtn = document.createElement("button");
         saveBtn.classList.add("saveBtn");
-        saveBtn.setAttribute("data-index", i);
+        saveBtn.setAttribute("dataIndex", i);
         timeContainer.append(hoursToday);
         hoursToday.append(textPlace);
-        textPlace.append(saveBtn);
+        hoursToday.append(saveBtn);
       }
 
       // Children to be put together
@@ -91,7 +110,20 @@
       // lock button
       // retrieve data-index
       // set in textbox automatically
+      console.log();
+      $(".saveBtn").on("click", function () {
+        // console.log($(this)[0].attributes.dataIndex.value);
+        var test = $(textPlace);
+        // console.log(test + "test");
+        console.log($(this).siblings()[0].value);
+        var textValue = $(this).siblings()[0].value;
+        var saveBtnIndex = $(this)[0].attributes.dataIndex.value;
+        // console.log(saveBtnIndex + " savebtn");
+        // console.log(textIndex + " text");
 
+        // console.log(textIndex);
+        localStorage.setItem(saveBtnIndex, textValue);
+      });
       // lock button saves info in textbox
     </script>
   </body>
