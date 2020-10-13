@@ -58,11 +58,14 @@
 
       for (var i = 0; i < hoursInWorkDay.length; i++) {
         var hour = hoursInWorkDay[i];
+        var timeBlock = document.createElement("div");
+        timeBlock.classList.add("row");
+        timeBlock.classList.add("time-block");
         var hoursToday = document.createElement("p");
         hoursToday.textContent = hour;
         hoursToday.classList.add("hour");
-        // hoursToday.classList.add("time-block");
-        hoursToday.classList.add("row");
+        hoursToday.classList.add("col");
+        // hoursToday.classList.add("row");
         var textPlace = document.createElement("textarea");
         var pastPlans = localStorage.getItem(i);
         console.log(pastPlans);
@@ -70,26 +73,31 @@
 
         if (currentHour.format("hA") === hour) {
           textPlace.classList.add("present");
-          textPlace.classList.add("row");
+          // textPlace.classList.add("row");
           textPlace.classList.add("description");
+          textPlace.classList.add("col-10");
           // textPlace.classList.add("hour");
         } else if (currentHour.isBefore(moment(hour, "hA"))) {
           textPlace.classList.add("future");
-          textPlace.classList.add("row");
+          // textPlace.classList.add("row");
           textPlace.classList.add("description");
+          textPlace.classList.add("col-10");
         } else {
           textPlace.classList.add("past");
-          textPlace.classList.add("row");
+          // textPlace.classList.add("row");
           textPlace.classList.add("description");
+          textPlace.classList.add("col-10");
         }
         var saveBtn = document.createElement("button");
         saveBtn.classList.add("saveBtn");
-        saveBtn.classList.add("row");
+        // saveBtn.classList.add("row");
         saveBtn.setAttribute("dataIndex", i);
-        saveBtn.classList.add("time-block");
-        timeContainer.append(hoursToday);
-        hoursToday.append(textPlace);
-        hoursToday.append(saveBtn);
+        // saveBtn.classList.add("time-block");
+        saveBtn.classList.add("col-1");
+        timeContainer.append(timeBlock);
+        timeBlock.append(hoursToday);
+        timeBlock.append(textPlace);
+        timeBlock.append(saveBtn);
       }
 
       // Children to be put together
